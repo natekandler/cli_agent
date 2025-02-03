@@ -1,0 +1,30 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+# Virtual environments
+venv/
+.env/
+.venv/
+env/
+
+# Installers
+*.whl
+
+# Poetry
+poetry.lock
+
+# Pytest cache
+.pytest_cache/
+
+# Logs and database files
+*.log
+logs/
+*.sqlite3
+*.db
+
+# macOS system files
+.DS_Store
+
+# Editor files
+.vscode/
+
