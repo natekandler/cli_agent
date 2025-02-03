@@ -10,7 +10,6 @@ class State(TypedDict):
 
 class Assistant:
     def __init__(self, runnable: Runnable):
-        print(f'-----initialize assitant')
         self.runnable =  runnable
 
     def __call__(self, state: State, config: RunnableConfig):

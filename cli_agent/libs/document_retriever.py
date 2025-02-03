@@ -5,8 +5,6 @@ from langchain_community.vectorstores import SKLearnVectorStore
 from langchain_openai import OpenAIEmbeddings
 
 
-os.environ["USER_AGENT"] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
-
 #list of urls to load documents from
 urls = [
     "https://lilianweng.github.io/posts/2023-06-23-agent/",
@@ -34,9 +32,11 @@ vectorstore = SKLearnVectorStore.from_documents(
 
 retriever = vectorstore.as_retriever(k=4)
 
-#define a tool, whick we will connect to our agent
 def retrieve_documents(query: str) -> list:
     """
-    retrive documents from the vector store based on query
+    Retrieve relevant document chunks based on the user's query.
     """
-    return retriever.invoke(query)
+    retrieved_docs = retriever.invoke(query)
+    context = "\n\n".join([doc.page_content for doc in retrieved_docs])
+    
+    return f"Here's relevant information:\n\n{context}\n\nNow answer the user's question: {query}"

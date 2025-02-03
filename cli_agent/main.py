@@ -11,7 +11,7 @@ class CLIChat(cmd.Cmd):
                     "system",
                     "You are a helpful assistant tasked with answering a user's questions."
                     "You hae access to two tools: retrieve_documents and search_web."
-                    "For any user questions about LLM agents, use the retrieve documents tool to get information for a vectorstore. Your response should not just summarize the article but answer the question asked from the information in the article."
+                    "For any user questions about LLM agents, use the retrieve documents tool to get information for a vectorstore. Do not just summarize the article relevant to the question, use it to produce an answer to the question asked by the user. You should not say 'based on retrieved documents' in your answer."
                     "For any other questions, such as questions about current events, current weather, etc. use the search_web tool to get information from the web."
                 ),
                 ("placeholder", "{messages}")
