@@ -1,4 +1,5 @@
 import cmd
+import uuid
 from libs.agent_runner import run_agent, display_graph_image
 from langchain_core.prompts import ChatPromptTemplate
 from libs.state_graph import StateGraphFactory
@@ -17,6 +18,7 @@ class CLIChat(cmd.Cmd):
                 ("placeholder", "{messages}")
             ]
         )
+        self.thread_id = str(uuid.uuid4())  # Unique session tracking
         self.graph = StateGraphFactory().create_graph(primary_assistant_prompt)
         super().__init__() 
 
@@ -26,7 +28,7 @@ class CLIChat(cmd.Cmd):
 
     def do_query(self, line):
        """Ask a question to the chatbot. The chatbot will process your input and return a response."""
-       response = run_agent(line, self.graph)
+       response = run_agent(line, self.graph, self.thread_id)
        print(response.get('response', 'no response'))
 
     def do_show_graph(self, line):
